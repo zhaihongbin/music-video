@@ -11,6 +11,11 @@ const routes = [
     component: Home,
     children: [
       {
+        path: '',
+        name: 'Hot',
+        component: () => import('../views/Hot')
+      },
+      {
         path: 'music',
         name: 'Music',
         component: () => import('../views/Music')

@@ -1,6 +1,6 @@
 <template>
-  <div class="phone-page">
-    <router-view/>
+  <div class="phone">
+    <router-view />
     <bottom-bar></bottom-bar>
   </div>
 </template>
@@ -10,13 +10,15 @@ import BottomBar from './BottomBar'
 export default {
   components: {
     BottomBar
+  },
+  methods: {
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import "../../assets/styles/global";
-.phone-page {
+.phone {
   width: 100%;
   height: 100%;
 }
