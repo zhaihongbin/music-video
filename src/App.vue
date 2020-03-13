@@ -1,32 +1,47 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div class="app">
+    <router-view />
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import { commonMixin } from './utils/mixin'
+export default {
+  mixins: [commonMixin],
+  methods: {
+    initRootFontSize () {
+      let ratio = window.innerWidth / 37.5
+      if (ratio > 16) { ratio = 16 }
+      const rootFontSize = `${ratio * 1}px`
+      document.querySelector('html').style.fontSize = rootFontSize
+    },
+    checkDevice () {
+      // Android, iPhone
+      const userAgent = window.navigator.userAgent
+      if (userAgent.includes('Android') || userAgent.includes('iPhone')) {
+        this.setDevice('phone')
+      } else {
+        this.setDevice('pc')
+      }
     }
+  },
+  created () {
+    // 检查访问设备是pc还是phone
+    this.checkDevice()
+  },
+  mounted () {
+    // 初始化rem，默认是1rem=10px，最大1rem=16px
+    this.initRootFontSize()
   }
+}
+</script>
+
+<style lang="scss">
+@import "./assets/styles/global";
+.app {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
 }
 </style>
